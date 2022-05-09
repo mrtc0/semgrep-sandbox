@@ -1,0 +1,9 @@
+rules:
+  - id: mutable-object
+    languages:
+      - ruby
+    message: Test
+    patterns:
+      - pattern: foo(...)
+      - pattern-not: foo("...")
+    severity: WARNING

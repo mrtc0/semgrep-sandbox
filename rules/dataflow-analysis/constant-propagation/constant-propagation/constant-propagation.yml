@@ -1,0 +1,9 @@
+rules:
+  - id: constant-propagation
+    patterns:
+      - pattern: eval(...)
+      - pattern-not: eval("...")
+    message: Found call to 'eval' on non-constant data
+    languages:
+      - python
+    severity: WARNING

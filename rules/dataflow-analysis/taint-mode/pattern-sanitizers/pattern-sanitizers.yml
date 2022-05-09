@@ -1,0 +1,23 @@
+rules:
+  - id: pattern-sanitizers-rule
+    languages:
+      - js
+    message: Careful with taint!
+    mode: taint
+    pattern-sanitizers:
+      # - pattern: sanizie(...)
+      # - pattern: sanizie_some_function(...)
+      # - pattern-not: some_unsafe_function(...)
+      # sanitize 関数の数だけ定義する必要があるが、
+      # 次のように設定すると `$F(...)` にマッチした関数、つまり、すべての関数はサニタイズするものと判定される
+      # ただし、`some_unsafe_function(...)` はサニタイズされない関数とする
+      - not_conflicting: true
+        patterns:
+          - pattern: $F(...)
+          - pattern-not: some_unsafe_function(...)
+    pattern-sinks:
+      - pattern: sink(...)
+    pattern-sources:
+      - pattern: source
+    severity: WARNING
+
